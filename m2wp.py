@@ -28,7 +28,7 @@ from optparse import OptionParser
 
 class Export(object):
     """Handles the details of creating a WordPress eXtended RSS (WXR)."""
-    
+
     def __init__(self, connection):
         """Creates the basic document."""
         self.connection = connection
@@ -43,19 +43,19 @@ class Export(object):
         self.rss.setAttribute('xmlns:dc', 'http://purl.org/dc/elements/1.1/')
         self.rss.setAttribute('xmlns:wp', 'http://wordpress.org/export/1.0/')
         self.channel = self._create_element('channel', self.rss)
-    
+
     def _create_element(self, name, parent=None, value=None):
         """Helper function for creating XML elements.
-        
+
         Parameters:
         :param name: The name of the element
         :type name: ``str``
         :param parent: (Optional) The XML node you want this element to be a
         child of.
         :type b: ``Node``
-    
+
         :return: The element
-        :rtype: ``Node``.        
+        :rtype: ``Node``.
         """
         element = self.xml.createElement(str(name))
         if parent:
@@ -64,7 +64,7 @@ class Export(object):
         if value:
             element_value = self.xml.createTextNode(str(value))
             element.appendChild(element_value)
-            
+
         return element
 
     def display(self):
@@ -182,7 +182,7 @@ class Export(object):
             self._create_element('wp:comment_approved', comment, '1')
             self._create_element('wp:comment_type', comment)
             self._create_element('wp:comment_parent', comment, '0')
-    
+
     def _cdata(self, data, parent):
         """Helper function for creating CDATA sections."""
         cdata = self.xml.createCDATASection(data)
@@ -230,7 +230,7 @@ class Exporter(object):
         cursor.execute("""SELECT * FROM sections""")
         rows = cursor.fetchall()
         for row in rows:
-            self.wxr.create_category(row[7], row[1]) 
+            self.wxr.create_category(row[7], row[1])
 
     def _process_tags(self):
         """Handles tags."""
@@ -240,11 +240,11 @@ class Exporter(object):
         tags = []
         for row in rows:
             tags += row[0].split(',')
-        
+
         tags = list(set(tags))
         for tag in tags:
-            self.wxr.create_tag(tag) 
-    
+            self.wxr.create_tag(tag)
+
     def _process_contents(self):
         """Handles contents (items)."""
         cursor = self.connection.cursor()
