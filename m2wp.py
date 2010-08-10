@@ -3,7 +3,7 @@
 database.
 """
 
-# Copyright 2008 David Murphy <schwuk@schwuk.com>.
+# Copyright 2008-2010 David Murphy <dave@schwuk.com>.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
